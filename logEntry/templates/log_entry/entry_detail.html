@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Entry{% endblock %}
+
+{% block container %}
+    <div class="container col-md-6">
+        <h2>Entry Detail</h2>
+
+        <P>Project name : {{ entry.project.project_name }}</P>
+        <p>Username : {{ entry.user.username }}</p>
+        <p>Location : {{ entry.location }}</p>
+        <p>Task date : {{ entry.task_date }}</p>
+        <p>Detail : {{ entry.detail }}</p>
+        <p>Working houre : {{ entry.working_hour }}</p>
+        <p>Note : {{ entry.note }}</p>
+    </div>
+
+{% endblock %}

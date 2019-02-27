@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load  staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Home page{% endblock %}</title>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- main css -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    {% block style %}
+
+    {% endblock %}
+</head>
+<body>
+
+<!--=========================
+===== Navbar ======
+==========================-->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">LOG ENTRY</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.profile.is_employee == True %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'entry:add-entry' %}">Add Log Entry</a>
+                </li>
+            {% endif %}
+            {% if user.is_authenticated %}
+                {% if user.username == request.user.username %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'entry:entry-list' user.username %}">All entries</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+                <li class="nav-item mr-4">{{ request.user.username }}</li>
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success mr-3">Log in</a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Sign up</a>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<!--=========================
+===== END Navbar ======
+==========================-->
+
+
+<!--=========================
+===== Container ======
+==========================-->
+
+{% block container %}
+
+{% endblock %}
+
+<!--=========================
+===== End Container ======
+==========================-->
+
+<!-- vendor javascript -->
+<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+<!-- poper js -->
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<!-- bootstrap min js -->
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<!-- main js -->
+<script src="{% static 'main.js' %}"></script>
+
+
+{% block javascripts %}
+
+{% endblock %}
+
+</body>
+</html>

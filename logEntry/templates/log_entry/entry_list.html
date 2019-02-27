@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Entry{% endblock %}
+
+{% block container %}
+    <div class="container col-md-6 mt-4">
+        <h2>Entry List</h2>
+        {% for entry in entry_list %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <P>Project name : {{ entry.project.project_name }}</P>
+                    <p>Username : {{ entry.user.username }}</p>
+                    <p>Location : {{ entry.location }}</p>
+                    <p>Task date : {{ entry.task_date }}</p>
+                    <p>Detail : {{ entry.detail }}</p>
+                    <p>Working houre : {{ entry.working_hour }}</p>
+                    <p>Note : {{ entry.note }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
